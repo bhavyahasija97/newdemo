@@ -1,0 +1,12 @@
+version: 2.1
+commands:
+  run-tests:
+    parameters:
+      after-deps:
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
+        type: steps
+        default: []
+    steps:
+    - run: make deps
+    - steps: << parameters.after-deps >>
+    - run: make test
