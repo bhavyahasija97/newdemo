@@ -1,6 +1,15 @@
 version: 2.1
-steps:
-  - run: make deps
-  - run: echo "The dependencies are installed"
-  - run: echo "And now I'm going to run the tests"
-  - run: make test
+jobs:
+  build:
+    docker:
+    - image: ubuntu:latest
+    steps:
+    - run:
+        command: |
+          s3cmd --access_key ${FOO_BAR} \
+                --secret_key ${BIN_BAZ} \
+                ls s3://some/where
+workflows:
+  workflow:
+    jobs:
+    - build
