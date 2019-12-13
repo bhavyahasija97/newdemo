@@ -1,15 +1,10 @@
 version: 2.1
 jobs:
   build:
-    docker:
-    - image: ubuntu:latest
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
-    - run:
-        command: |
-          s3cmd --access_key ${FOO_BAR} \
-                --secret_key ${BIN_BAZ} \
-                ls s3://some/where
-workflows:
-  workflow:
-    jobs:
-    - build
+      - checkout
+      - run:
+          name: "Testing"
+          command: echo "Hi"
